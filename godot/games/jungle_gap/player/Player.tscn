@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://games/jungle_gap/scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://games/jungle_gap/scripts/move.gd" type="Script" id=2]
-[ext_resource path="res://assets/mini_games/player1_jg.png" type="Texture" id=3]
+[ext_resource path="res://assets/mini_games/player_jg.png" type="Texture" id=3]
 [ext_resource path="res://games/jungle_gap/scripts/attack.gd" type="Script" id=4]
 [ext_resource path="res://games/jungle_gap/player/fire_projectile.tscn" type="PackedScene" id=5]
 [ext_resource path="res://games/jungle_gap/scripts/hit_box_area.gd" type="Script" id=6]
+[ext_resource path="res://assets/mini_games/mira.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 36.5, 30 )
+extents = Vector2( 29.375, 28.75 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -24,9 +25,37 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 32, 31, 3, 34, 35, 36, 37, 38, 39 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "fire"
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -56,6 +85,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
+length = 0.9
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -64,14 +94,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=9]
 resource_name = "walk"
+length = 0.9
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -80,40 +111,66 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "walk_up"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 36.5, 30 )
+extents = Vector2( 29.375, 28.75 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
+scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
+scale = Vector2( 1.5, 1.3 )
 texture = ExtResource( 3 )
+hframes = 10
+vframes = 2
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( 1.5, 2 )
+position = Vector2( 6.875, 2.5 )
+scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 5 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 anims/RESET = SubResource( 4 )
+anims/fall = SubResource( 8 )
 anims/fire = SubResource( 1 )
 anims/idle = SubResource( 2 )
-anims/walk = SubResource( 3 )
+anims/walk = SubResource( 9 )
+anims/walk_up = SubResource( 7 )
 
 [node name="HitboxArea" type="Area2D" parent="."]
 script = ExtResource( 6 )
+player1 = NodePath("..")
 
 [node name="CollisionHitBox" type="CollisionShape2D" parent="HitboxArea"]
-position = Vector2( 1.5, 2 )
+position = Vector2( 6.875, 2.5 )
 shape = SubResource( 6 )
 
 [node name="ProjectSpawner" type="Position2D" parent="."]
-position = Vector2( 68, 0 )
+position = Vector2( 55, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -121,14 +178,27 @@ position = Vector2( 68, 0 )
 
 [node name="Move" type="Node" parent="States"]
 script = ExtResource( 2 )
-walk_speek = 200
+walk_speek = 250
 player = NodePath("../..")
+sprite = NodePath("../../Sprite")
+spawn = NodePath("../../ProjectSpawner")
+animation = NodePath("../../Animation")
 
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource( 4 )
 player = NodePath("../..")
 project_spawner = NodePath("../../ProjectSpawner")
+mira = NodePath("../../Mira")
 fire_project = ExtResource( 5 )
 animation = NodePath("../../Animation")
+
+[node name="Mira" type="Position2D" parent="."]
+modulate = Color( 0.164706, 0.0196078, 0.0196078, 1 )
+position = Vector2( 111.25, -21.25 )
+scale = Vector2( 2, 2 )
+
+[node name="Sprite" type="Sprite" parent="Mira"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
 
 [connection signal="area_entered" from="HitboxArea" to="HitboxArea" method="_on_HitboxArea_area_entered"]

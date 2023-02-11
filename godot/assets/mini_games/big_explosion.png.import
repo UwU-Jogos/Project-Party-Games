@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player1_jg.png-b70c8f33665bd506d9cdd1d433f84b02.stex"
+path="res://.import/big_explosion.png-69230b09f0696aa904c832f72af46135.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mini_games/player1_jg.png"
-dest_files=[ "res://.import/player1_jg.png-b70c8f33665bd506d9cdd1d433f84b02.stex" ]
+source_file="res://assets/mini_games/big_explosion.png"
+dest_files=[ "res://.import/big_explosion.png-69230b09f0696aa904c832f72af46135.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

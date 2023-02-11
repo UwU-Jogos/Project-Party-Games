@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "BiteBox",
+"language": "GDScript",
+"path": "res://games/jungle_gap/scripts/bite_box.gd"
+}, {
 "base": "Node2D",
 "class": "Board",
 "language": "GDScript",
@@ -44,15 +49,40 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://maps/board/cards/ui/draggable/DraggableCard.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "DragonJG",
+"language": "GDScript",
+"path": "res://games/jungle_gap/scripts/dragon_jg.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "Effetc",
+"language": "GDScript",
+"path": "res://games/jungle_gap/scripts/explosion.gd"
+}, {
 "base": "Area2D",
 "class": "FireProjectile",
 "language": "GDScript",
 "path": "res://games/jungle_gap/scripts/fire_projectile.gd"
 }, {
+"base": "TextureProgress",
+"class": "HealthBar",
+"language": "GDScript",
+"path": "res://games/jungle_gap/scripts/health_bar.gd"
+}, {
 "base": "Area2D",
 "class": "HitBoxArea",
 "language": "GDScript",
 "path": "res://games/jungle_gap/scripts/hit_box_area.gd"
+}, {
+"base": "Area2D",
+"class": "HitBoxArea2",
+"language": "GDScript",
+"path": "res://games/jungle_gap/player/HitboxArea2.gd"
+}, {
+"base": "Area2D",
+"class": "HitBoxDragon",
+"language": "GDScript",
+"path": "res://games/jungle_gap/scripts/hit_box_dragon.gd"
 }, {
 "base": "Node",
 "class": "JG_AttackState",
@@ -68,6 +98,11 @@ _global_script_classes=[ {
 "class": "JG_Player",
 "language": "GDScript",
 "path": "res://games/jungle_gap/scripts/player.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "JG_Player2",
+"language": "GDScript",
+"path": "res://games/jungle_gap/scripts/player2.gd"
 }, {
 "base": "Node",
 "class": "Score",
@@ -89,12 +124,13 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://maps/board/tile/Tile.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "Util",
 "language": "GDScript",
 "path": "res://Util.gd"
 } ]
 _global_script_class_icons={
+"BiteBox": "",
 "Board": "",
 "BoardPlayer": "",
 "Card": "",
@@ -102,11 +138,17 @@ _global_script_class_icons={
 "Deck": "",
 "Dice": "",
 "DraggableCard": "",
+"DragonJG": "",
+"Effetc": "",
 "FireProjectile": "",
+"HealthBar": "",
 "HitBoxArea": "",
+"HitBoxArea2": "",
+"HitBoxDragon": "",
 "JG_AttackState": "",
 "JG_MoveState": "",
 "JG_Player": "",
+"JG_Player2": "",
 "Score": "",
 "Slot": "",
 "SubPoint": "",
@@ -131,25 +173,79 @@ common/drop_mouse_on_gui_input_disabled=true
 
 [input]
 
-ui_accept={
+ui_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
  ]
 }
-zoom_in={
+ui_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":125,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
  ]
 }
-zoom_out={
+ui_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":123,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+mira_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":1.0,"script":null)
+ ]
+}
+mira_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":-1.0,"script":null)
+ ]
+}
+mira_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":1.0,"script":null)
+ ]
+}
+mira_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_right2={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+ ]
+}
+ui_left2={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_up2={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+ui_down2={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+ ]
+}
+attack2={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 

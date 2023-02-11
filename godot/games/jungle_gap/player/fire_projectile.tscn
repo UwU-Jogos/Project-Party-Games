@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/mini_games/bullets.png" type="Texture" id=1]
 [ext_resource path="res://games/jungle_gap/scripts/fire_projectile.gd" type="Script" id=2]
+[ext_resource path="res://games/jungle_gap/player/explosion.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -9,7 +10,9 @@ extents = Vector2( 4, 4 )
 [node name="Fire" type="Area2D"]
 scale = Vector2( 3, 3 )
 script = ExtResource( 2 )
-move_speed = 750
+damage_base = 10
+move_speed = 800
+explosion_effect = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

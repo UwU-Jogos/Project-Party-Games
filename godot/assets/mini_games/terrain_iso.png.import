@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/health_bars.png-4e89165acadbad2fc28198c118068603.stex"
+path="res://.import/terrain_iso.png-323add0f1b21c61724d3a66f47154c72.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mini_games/health_bars.png"
-dest_files=[ "res://.import/health_bars.png-4e89165acadbad2fc28198c118068603.stex" ]
+source_file="res://assets/mini_games/terrain_iso.png"
+dest_files=[ "res://.import/terrain_iso.png-323add0f1b21c61724d3a66f47154c72.stex" ]
 
 [params]
 
